@@ -1,0 +1,107 @@
+
+======================================================================
+TASK 3 — SYSTEMATIC TESTS (A*, Manhattan heuristic)
+======================================================================
+
+--- Test 1: original warehouse ---
+start=(1, 1)  goal=(7, 15)
+A* found=True  path_length=40  states_expanded=64
+path (cells): [(1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (2, 5), (3, 5), (4, 5), (5, 5), (5, 6), (5, 7), (5, 8), (5, 9), (5, 10), (5, 11), (5, 12), (5, 13), (4, 13), (3, 13), (3, 12), (3, 11), (3, 10), (3, 9), (3, 8), (3, 7), (2, 7), (1, 7), (1, 8), (1, 9), (1, 10), (1, 11), (1, 12), (1, 13), (1, 14), (1, 15), (2, 15), (3, 15), (4, 15), (5, 15), (6, 15), (7, 15)]
+path (moves): ['Right', 'Right', 'Right', 'Right', 'Down', 'Down', 'Down', 'Down', 'Right', 'Right', 'Right', 'Right', 'Right', 'Right', 'Right', 'Right', 'Up', 'Up', 'Left', 'Left', 'Left', 'Left', 'Left', 'Left', 'Up', 'Up', 'Right', 'Right', 'Right', 'Right', 'Right', 'Right', 'Right', 'Right', 'Down', 'Down', 'Down', 'Down', 'Down', 'Down']
+#################
+#S****#*********#
+#.###*#*#######*#
+#...#*#*******#*#
+###.#*#######*#*#
+#...#*********#*#
+#.###########.#*#
+#.............#G#
+#################
+
+--- Test 2: trivial (goal adjacent) ---
+start=(1, 1)  goal=(1, 2)
+A* found=True  path_length=1  states_expanded=2
+path (cells): [(1, 1), (1, 2)]
+path (moves): ['Right']
+#####
+#SG##
+#####
+
+--- Test 3: no solution ---
+start=(1, 1)  goal=(3, 5)
+A* found=False  path_length=0  states_expanded=9
+
+--- Test 4: alternative paths ---
+start=(1, 1)  goal=(1, 5)
+A* found=True  path_length=4  states_expanded=5
+path (cells): [(1, 1), (1, 2), (1, 3), (1, 4), (1, 5)]
+path (moves): ['Right', 'Right', 'Right', 'Right']
+#######
+#S***G#
+#.###.#
+#.....#
+#######
+
+======================================================================
+TASK 5 — BFS vs A* (original corridor map AND open map)
+======================================================================
+
+Original (corridor) map:
+Measure             BFS         A*          
+Solution found      True        True        
+Path length         40          40          
+States expanded     64          64          
+
+Open warehouse map:
+Measure             BFS         A*          
+Solution found      True        True        
+Path length         23          23          
+States expanded     159         125         
+
+======================================================================
+TASK 6 — HEURISTIC INVESTIGATION ON THE OPEN MAP
+======================================================================
+Heuristic                     found   path_len  expanded  
+Manhattan (baseline)          True    23        125       
+Zero (uniform cost)           True    23        159       
+Euclidean                     True    23        132       
+2 x Manhattan (inadmissible)  True    23        81        
+
+======================================================================
+TASK 6 — SHORTEST-PATH CHECK ON THE ALTERNATIVE MAP
+======================================================================
+Known shortest path length = 4
+  Zero             path_len=4  (OPTIMAL)
+  Euclidean        path_len=4  (OPTIMAL)
+  2 x Manhattan    path_len=4  (OPTIMAL)
+
+======================================================================
+BONUS — A* (optimal) vs GREEDY BEST-FIRST (too aggressive)
+======================================================================
+Map:
+#########
+#S..#...#
+#.......#
+#.#.....#
+#....#..#
+#....#.G#
+#########
+
+A*     : path_length=10   expanded=28  (optimal, balances g and h)
+Greedy : path_length=14   expanded=16  (SUBOPTIMAL, chases h only)
+A* path overlay:
+#########
+#S..#...#
+#***....#
+#.#****.#
+#....#*.#
+#....#*G#
+#########
+Greedy path overlay:
+#########
+#S..#...#
+#*......#
+#*#.***.#
+#*..*#*.#
+#****#*G#
+#########
