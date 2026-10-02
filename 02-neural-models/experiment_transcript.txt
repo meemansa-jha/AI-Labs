@@ -1,0 +1,64 @@
+======================================================================
+TASK 4 PART A/B — basic learning check + backprop inspection
+======================================================================
+initial loss : 0.6977
+final loss   : 0.0389
+input -> probability -> predicted label (target):
+  [0.0, 0.0] -> 0.0431 -> 0  (target 0)
+  [0.0, 1.0] -> 0.9676 -> 1  (target 1)
+  [1.0, 0.0] -> 0.9676 -> 1  (target 1)
+  [1.0, 1.0] -> 0.0448 -> 0  (target 0)
+all four correct? True
+
+fc1.weight.grad  (this IS dL/dW^(1), averaged over the 4 examples):
+tensor([[-0.0020, -0.0020],
+        [ 0.0012,  0.0012]])
+Because BCEWithLogitsLoss uses the MEAN over the 4 examples, the
+gradient of that mean is the average of the four per-example gradients
+(the derivative is linear in the sum, and 1/4 factors through).
+
+======================================================================
+TASK 4 PART C — symmetry experiment (all weights initialised to 0)
+======================================================================
+Hidden-layer weight matrix rows over the first few steps:
+  step 0: row0=[0.0, 0.0]  row1=[0.0, 0.0]  rows identical? True
+  step 1: row0=[0.0, 0.0]  row1=[0.0, 0.0]  rows identical? True
+  step 2: row0=[0.0, 0.0]  row1=[0.0, 0.0]  rows identical? True
+  step 3: row0=[0.0, 0.0]  row1=[0.0, 0.0]  rows identical? True
+  step 4: row0=[0.0, 0.0]  row1=[0.0, 0.0]  rows identical? True
+
+After full training from zero init: all four correct? False  (final loss 0.6931)
+Explanation: identical hidden units compute the same output and
+receive the same gradient, so they update identically and stay
+identical forever. The two units never differentiate, so the network
+cannot form the two distinct half-plane features XOR needs.
+
+======================================================================
+TASK 4 PART D — activation experiment
+======================================================================
+activationfinal loss    4/4 correct?  early |grad W1| 
+------------------------------------------------------
+sigmoid   0.0389        True          0.0015          
+tanh      0.0013        True          0.0542          
+relu      0.4774        False         0.0016          
+
+======================================================================
+TASK 5 — three-class extension (softmax + cross-entropy)
+======================================================================
+final loss: 0.0004
+final fc2 weight shape (should be 3x2): (3, 2)
+logits per example: 3
+
+input -> softmax probabilities -> predicted class (target):
+  [0.0, 0.0] -> [0.999, 0.001, 0.0] -> class 0  (target 0)
+  [0.0, 1.0] -> [0.0, 1.0, 0.0] -> class 1  (target 1)
+  [1.0, 0.0] -> [0.0, 1.0, 0.0] -> class 1  (target 1)
+  [1.0, 1.0] -> [0.0, 0.001, 0.999] -> class 2  (target 2)
+
+example (0,1) softmax vector = [0.00012837088434025645, 0.9996258020401001, 0.0002458078961353749]
+sum of components = 1.000000  (should be ~1.0)
+softmax after adding 100 to all logits = [0.00012837088434025645, 0.9996258020401001, 0.00024580812896601856]
+max abs difference from original = 2.33e-10  (≈ roundoff)
+Softmax is shift-invariant because exp(a_i + c)/sum_j exp(a_j + c)
+= exp(a_i)exp(c) / (exp(c) sum_j exp(a_j)); the exp(c) cancels.
+Stable implementations subtract max logit to keep exp() from overflowing.
