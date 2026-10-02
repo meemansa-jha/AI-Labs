@@ -1,0 +1,147 @@
+======================================================================
+PART IV — FIRST-ORDER CONDITIONAL PROBABILITY TABLE
+======================================================================
+P(next | 'the') = {'cat': 0.25, 'mat': 0.167, 'rug': 0.167, 'dog': 0.25, 'park': 0.167}
+P(next | 'cat') = {'sat': 0.667, 'ran': 0.333}
+P(next | 'dog') = {'sat': 0.667, 'ran': 0.333}
+P(next | 'sat') = {'on': 1.0}
+P(next | 'ran') = {'to': 1.0}
+P(next | 'on') = {'the': 1.0}
+P(next | 'to') = {'the': 1.0}
+
+(Question 3) zero-probability transitions: any (current, next) pair
+not listed above has probability 0 — e.g. P('dog' | 'cat') = 0,
+P('mat' | 'the') = 0, P('cat' | 'sat') = 0.
+
+======================================================================
+PART VII — NORMALISATION TEST (first-order)
+======================================================================
+Normalisation check — sum_v P(v | w) should be 1.0 for every context:
+  <START>                      total = 1.000000
+  the                          total = 1.000000
+  cat                          total = 1.000000
+  sat                          total = 1.000000
+  on                           total = 1.000000
+  mat                          total = 1.000000
+  rug                          total = 1.000000
+  dog                          total = 1.000000
+  ran                          total = 1.000000
+  to                           total = 1.000000
+  park                         total = 1.000000
+All first-order distributions normalised? True
+
+======================================================================
+PART VIII — NEXT-WORD PREDICTION
+======================================================================
+P(next | 'the') = {'cat': 0.25, 'mat': 0.167, 'rug': 0.167, 'dog': 0.25, 'park': 0.167}   argmax = 'cat'
+P(next | 'cat') = {'sat': 0.667, 'ran': 0.333}   argmax = 'sat'
+P(next | 'dog') = {'sat': 0.667, 'ran': 0.333}   argmax = 'sat'
+P(next | 'sat') = {'on': 1.0}   argmax = 'on'
+P(next | 'on') = {'the': 1.0}   argmax = 'the'
+P(next | 'ran') = {'to': 1.0}   argmax = 'to'
+P(next | 'to') = {'the': 1.0}   argmax = 'the'
+
+======================================================================
+PART IX / X — GENERATION (sampling vs greedy)
+======================================================================
+
+20 sampled sentences (first-order):
+   1. the cat sat on the dog ran to the cat sat on the cat sat on the dog ran to
+   2. the dog sat on the mat
+   3. the park
+   4. the dog sat on the rug
+   5. the park
+   6. the cat sat on the cat sat on the mat
+   7. the mat
+   8. the dog sat on the mat
+   9. the rug
+  10. the dog sat on the mat
+  11. the park
+  12. the mat
+  13. the mat
+  14. the mat
+  15. the mat
+  16. the rug
+  17. the cat sat on the cat sat on the park
+  18. the dog ran to the dog sat on the park
+  19. the rug
+  20. the park
+
+5 greedy sentences (first-order) — note the determinism:
+  1. the cat sat on the cat sat on the cat sat on the cat sat on the cat sat on
+  2. the cat sat on the cat sat on the cat sat on the cat sat on the cat sat on
+  3. the cat sat on the cat sat on the cat sat on the cat sat on the cat sat on
+  4. the cat sat on the cat sat on the cat sat on the cat sat on the cat sat on
+  5. the cat sat on the cat sat on the cat sat on the cat sat on the cat sat on
+
+5 sampled sentences (first-order) for the variation comparison:
+  1. the dog sat on the dog sat on the cat ran to the mat
+  2. the park
+  3. the cat ran to the rug
+  4. the park
+  5. the rug
+
+======================================================================
+PART XI / XII — SECOND-ORDER MODEL
+======================================================================
+Example second-order contexts:
+P(next | ('<START>', 'the')) = {'cat': 0.5, 'dog': 0.5}
+P(next | ('the', 'cat')) = {'sat': 0.667, 'ran': 0.333}
+P(next | ('the', 'dog')) = {'sat': 0.667, 'ran': 0.333}
+P(next | ('cat', 'sat')) = {'on': 1.0}
+P(next | ('sat', 'on')) = {'the': 1.0}
+P(next | ('on', 'the')) = {'mat': 0.5, 'rug': 0.5}
+
+Normalisation test (second-order):
+Normalisation check — sum_v P(v | w) should be 1.0 for every context:
+  ('<START>', '<START>')       total = 1.000000
+  ('<START>', 'the')           total = 1.000000
+  ('the', 'cat')               total = 1.000000
+  ('cat', 'sat')               total = 1.000000
+  ('sat', 'on')                total = 1.000000
+  ('on', 'the')                total = 1.000000
+  ('the', 'mat')               total = 1.000000
+  ('the', 'rug')               total = 1.000000
+  ('the', 'dog')               total = 1.000000
+  ('dog', 'sat')               total = 1.000000
+  ('dog', 'ran')               total = 1.000000
+  ('ran', 'to')                total = 1.000000
+  ('to', 'the')                total = 1.000000
+  ('the', 'park')              total = 1.000000
+  ('cat', 'ran')               total = 1.000000
+All second-order distributions normalised? True
+
+20 sampled sentences (second-order):
+   1. the cat sat on the rug
+   2. the cat sat on the mat
+   3. the dog sat on the mat
+   4. the cat sat on the mat
+   5. the dog ran to the park
+   6. the dog sat on the rug
+   7. the cat sat on the mat
+   8. the cat sat on the rug
+   9. the dog sat on the rug
+  10. the dog ran to the park
+  11. the dog ran to the park
+  12. the cat sat on the rug
+  13. the cat ran to the park
+  14. the dog sat on the rug
+  15. the dog sat on the rug
+  16. the cat sat on the rug
+  17. the cat ran to the park
+  18. the dog sat on the mat
+  19. the dog ran to the park
+  20. the cat sat on the rug
+
+======================================================================
+PART XIII — COMPARISON (first-order vs second-order)
+======================================================================
+distinct first-order parameters (nonzero entries):  17
+distinct second-order parameters (nonzero entries): 19
+first-order contexts:  11
+second-order contexts: 15
+unique sentences / 50 (first-order):  20
+unique sentences / 50 (second-order): 6
+Second-order contexts are more specific, so each one has fewer
+continuations -> more coherent but less diverse text, and more
+zero-probability contexts for unseen 2-word histories.
