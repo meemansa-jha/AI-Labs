@@ -1,0 +1,25 @@
+Warehouse map:
+#####################
+#S....#............G#
+#.##....##########..#
+#....##.............#
+#.######.###.#.###..#
+#........#..........#
+#####################
+
+start S = (1, 1)
+goal  G = (1, 19)
+
+Path found.  length = 20 moves, states expanded = 59
+
+Actions:
+  Right -> Right -> Right -> Down -> Right -> Right -> Right -> Up -> Right -> Right -> Right -> Right -> Right -> Right -> Right -> Right -> Right -> Right -> Right -> Right
+
+Path overlaid on the map (* = path):
+#####################
+#S***.#************G#
+#.##****##########..#
+#....##.............#
+#.######.###.#.###..#
+#........#..........#
+#####################
