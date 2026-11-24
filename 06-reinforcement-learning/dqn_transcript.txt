@@ -1,0 +1,152 @@
+
+DQN, ONE ROBOT (seed 7, 12000 env steps)
+  step   3000  eps=0.70  episodes=83  last-50 success=0.32  collision=0.00
+  step   6000  eps=0.41  episodes=225  last-50 success=0.76  collision=0.00
+  step   9000  eps=0.11  episodes=497  last-50 success=1.00  collision=0.00
+  step  12000  eps=0.05  episodes=1182  last-50 success=1.00  collision=0.00
+  optimiser updates: 2875, training episodes: 1182
+  greedy from (2,0): success=True steps=4 invalid=0 actions=['Right', 'Right', 'Right', 'Right']
+. . # . .
+. . # . .
+R R R R R
+. . # . .
+. . # . .
+  greedy from (0,0) (no retraining): success=True steps=6 invalid=0 path=[(0, 0), (0, 1), (1, 1), (2, 1), (2, 2), (2, 3), (2, 4)]
+
+DQN, TWO ROBOTS (seed 7, 60000 env steps)
+  step  10000  eps=0.80  episodes=306  last-50 success=0.04  collision=0.48
+  step  20000  eps=0.60  episodes=654  last-50 success=0.24  collision=0.48
+  step  30000  eps=0.41  episodes=1006  last-50 success=0.14  collision=0.52
+  step  40000  eps=0.21  episodes=1308  last-50 success=0.04  collision=0.10
+  step  50000  eps=0.05  episodes=1582  last-50 success=0.00  collision=0.14
+  step  60000  eps=0.05  episodes=1858  last-50 success=0.00  collision=0.18
+  optimiser updates: 14875, training episodes: 1858
+  greedy joint rollout from A=(2,0), B=(2,4):
+   t  A action B action A pos    B pos   
+   0  -        -        (2, 0)   (2, 4)  
+   1  Up       Left     (1, 0)   (2, 3)  
+   2  Up       Left     (0, 0)   (2, 2)  
+   3  Wait     Left     (0, 0)   (2, 1)  
+   4  Wait     Left     (0, 0)   (2, 0)  
+   5  Wait     Left     (0, 0)   (2, 0)  
+   6  Wait     Left     (0, 0)   (2, 0)  
+   7  Wait     Left     (0, 0)   (2, 0)  
+   8  Wait     Left     (0, 0)   (2, 0)  
+   9  Wait     Left     (0, 0)   (2, 0)  
+  10  Wait     Left     (0, 0)   (2, 0)  
+  11  Wait     Left     (0, 0)   (2, 0)  
+  12  Wait     Left     (0, 0)   (2, 0)  
+  13  Wait     Left     (0, 0)   (2, 0)  
+  14  Wait     Left     (0, 0)   (2, 0)  
+  15  Wait     Left     (0, 0)   (2, 0)  
+  16  Wait     Left     (0, 0)   (2, 0)  
+  17  Wait     Left     (0, 0)   (2, 0)  
+  18  Wait     Left     (0, 0)   (2, 0)  
+  19  Wait     Left     (0, 0)   (2, 0)  
+  20  Wait     Left     (0, 0)   (2, 0)  
+  21  Wait     Left     (0, 0)   (2, 0)  
+  22  Wait     Left     (0, 0)   (2, 0)  
+  23  Wait     Left     (0, 0)   (2, 0)  
+  24  Wait     Left     (0, 0)   (2, 0)  
+  25  Wait     Left     (0, 0)   (2, 0)  
+  26  Wait     Left     (0, 0)   (2, 0)  
+  27  Wait     Left     (0, 0)   (2, 0)  
+  28  Wait     Left     (0, 0)   (2, 0)  
+  29  Wait     Left     (0, 0)   (2, 0)  
+  30  Wait     Left     (0, 0)   (2, 0)  
+  31  Wait     Left     (0, 0)   (2, 0)  
+  32  Wait     Left     (0, 0)   (2, 0)  
+  33  Wait     Left     (0, 0)   (2, 0)  
+  34  Wait     Left     (0, 0)   (2, 0)  
+  35  Wait     Left     (0, 0)   (2, 0)  
+  36  Wait     Left     (0, 0)   (2, 0)  
+  37  Wait     Left     (0, 0)   (2, 0)  
+  38  Wait     Left     (0, 0)   (2, 0)  
+  39  Wait     Left     (0, 0)   (2, 0)  
+  40  Wait     Left     (0, 0)   (2, 0)  
+  outcome=timeout steps=40 invalid=0
+  additional start A=(0,0), B=(4,4) (no retraining):
+   t  A action B action A pos    B pos   
+   0  -        -        (0, 0)   (4, 4)  
+   1  Left     Up       (0, 0)   (3, 4)  
+   2  Right    Left     (0, 1)   (3, 3)  
+   3  Left     Up       (0, 0)   (2, 3)  
+   4  Down     Left     (1, 0)   (2, 2)  
+   5  Wait     Left     (1, 0)   (2, 1)  
+   6  Up       Left     (0, 0)   (2, 0)  
+   7  Wait     Left     (0, 0)   (2, 0)  
+   8  Wait     Left     (0, 0)   (2, 0)  
+   9  Wait     Left     (0, 0)   (2, 0)  
+  10  Wait     Left     (0, 0)   (2, 0)  
+  11  Wait     Left     (0, 0)   (2, 0)  
+  12  Wait     Left     (0, 0)   (2, 0)  
+  13  Wait     Left     (0, 0)   (2, 0)  
+  14  Wait     Left     (0, 0)   (2, 0)  
+  15  Wait     Left     (0, 0)   (2, 0)  
+  16  Wait     Left     (0, 0)   (2, 0)  
+  17  Wait     Left     (0, 0)   (2, 0)  
+  18  Wait     Left     (0, 0)   (2, 0)  
+  19  Wait     Left     (0, 0)   (2, 0)  
+  20  Wait     Left     (0, 0)   (2, 0)  
+  21  Wait     Left     (0, 0)   (2, 0)  
+  22  Wait     Left     (0, 0)   (2, 0)  
+  23  Wait     Left     (0, 0)   (2, 0)  
+  24  Wait     Left     (0, 0)   (2, 0)  
+  25  Wait     Left     (0, 0)   (2, 0)  
+  26  Wait     Left     (0, 0)   (2, 0)  
+  27  Wait     Left     (0, 0)   (2, 0)  
+  28  Wait     Left     (0, 0)   (2, 0)  
+  29  Wait     Left     (0, 0)   (2, 0)  
+  30  Wait     Left     (0, 0)   (2, 0)  
+  31  Wait     Left     (0, 0)   (2, 0)  
+  32  Wait     Left     (0, 0)   (2, 0)  
+  33  Wait     Left     (0, 0)   (2, 0)  
+  34  Wait     Left     (0, 0)   (2, 0)  
+  35  Wait     Left     (0, 0)   (2, 0)  
+  36  Wait     Left     (0, 0)   (2, 0)  
+  37  Wait     Left     (0, 0)   (2, 0)  
+  38  Wait     Left     (0, 0)   (2, 0)  
+  39  Wait     Left     (0, 0)   (2, 0)  
+  40  Wait     Left     (0, 0)   (2, 0)  
+  outcome=timeout steps=40 invalid=1
+
+DQN, TWO ROBOTS (seed 7, 120000 env steps)
+  step  10000  eps=0.90  episodes=304  last-50 success=0.08  collision=0.38
+  step  20000  eps=0.80  episodes=638  last-50 success=0.04  collision=0.54
+  step  30000  eps=0.70  episodes=979  last-50 success=0.06  collision=0.70
+  step  40000  eps=0.60  episodes=1335  last-50 success=0.08  collision=0.64
+  step  50000  eps=0.51  episodes=1692  last-50 success=0.04  collision=0.46
+  step  60000  eps=0.41  episodes=2025  last-50 success=0.26  collision=0.36
+  step  70000  eps=0.31  episodes=2363  last-50 success=0.12  collision=0.38
+  step  80000  eps=0.21  episodes=2691  last-50 success=0.08  collision=0.46
+  step  90000  eps=0.11  episodes=3012  last-50 success=0.16  collision=0.08
+  step 100000  eps=0.05  episodes=3290  last-50 success=0.04  collision=0.10
+  step 110000  eps=0.05  episodes=3580  last-50 success=0.34  collision=0.08
+  step 120000  eps=0.05  episodes=4340  last-50 success=0.94  collision=0.00
+  optimiser updates: 29875, training episodes: 4340
+  greedy joint rollout from A=(2,0), B=(2,4):
+   t  A action B action A pos    B pos   
+   0  -        -        (2, 0)   (2, 4)  
+   1  Wait     Left     (2, 0)   (2, 3)  
+   2  Right    Left     (2, 1)   (2, 2)  
+   3  Up       Left     (1, 1)   (2, 1)  
+   4  Down     Left     (2, 1)   (2, 0)  
+   5  Right    Down     (2, 2)   (2, 0)  
+   6  Right    Up       (2, 3)   (2, 0)  
+   7  Right    Down     (2, 4)   (2, 0)  
+  outcome=success steps=7 invalid=0
+  additional start A=(0,0), B=(4,4) (no retraining):
+   t  A action B action A pos    B pos   
+   0  -        -        (0, 0)   (4, 4)  
+   1  Down     Wait     (1, 0)   (4, 4)  
+   2  Down     Wait     (2, 0)   (4, 4)  
+   3  Wait     Left     (2, 0)   (4, 3)  
+   4  Right    Up       (2, 1)   (3, 3)  
+   5  Wait     Up       (2, 1)   (2, 3)  
+   6  Right    Wait     (2, 2)   (2, 3)  
+   7  Right    Down     (2, 3)   (3, 3)  
+   8  Up       Up       (1, 3)   (2, 3)  
+   9  Right    Left     (1, 4)   (2, 2)  
+  10  Wait     Left     (1, 4)   (2, 1)  
+  11  Down     Left     (2, 4)   (2, 0)  
+  outcome=success steps=11 invalid=0

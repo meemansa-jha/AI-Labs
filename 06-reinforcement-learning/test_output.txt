@@ -1,0 +1,32 @@
+-- Task 4: single-robot environment --
+[PASS] (0, 0) action 0: -> (0, 0), r=-1.0, terminated=False
+[PASS] (1, 1) action 3: -> (1, 1), r=-1.0, terminated=False
+[PASS] (2, 1) action 3: -> (2, 2), r=-0.1, terminated=False
+[PASS] (2, 1) action 4: -> (2, 1), r=-0.1, terminated=False
+[PASS] (2, 3) action 3: -> (2, 4), r=10.0, terminated=True
+[PASS] 40 waits -> truncated after exactly 40 steps, not terminated
+-- Task 4: synthetic Q-learning updates --
+[PASS] non-terminal target = 2.9
+[PASS] non-terminal update -> 0.9
+[PASS] terminal target = 5 (ignores next state)
+[PASS] terminal update -> 1.32
+[PASS] truncated (terminated=False) update -> 0.9, bootstraps
+-- Task 6: DQN loss on hand-computable targets --
+[PASS] targets = [2.9, 5.0, 2.9]
+[PASS] loss uses Q(s, recorded action)
+[PASS] target carries no gradient
+[PASS] gradient flows into the online network
+-- Task 7: two-robot movement and collision rules --
+[PASS] ((2, 1), (2, 3)) A=3 B=2: same-cell collision, r=-10, terminated, old positions kept
+[PASS] ((2, 1), (2, 2)) A=3 B=2: swap collision, r=-10, terminated, old positions kept
+[PASS] ((2, 1), (2, 2)) A=3 B=3: moves to ((2, 2), (2, 3)), r=-0.1, no collision
+[PASS] ((2, 1), (2, 2)) A=0 B=4: moves to ((1, 1), (2, 2)), r=-0.1, no collision
+[PASS] entering a waiting robot's cell -> collision
+[PASS] A arrives: reward -0.1 + 5 = 4.9
+[PASS] A at goal ignores its action and stays
+[PASS] no repeated arrival reward (r=-0.1)
+[PASS] second arrival completes task: r = 9.9, terminated
+[PASS] two invalid moves: r = -0.1 - 2 = -2.1
+[PASS] joint action encode/decode round-trips
+
+All tests passed.

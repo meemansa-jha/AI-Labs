@@ -1,0 +1,24 @@
+Q-LEARNING (seed 7, 1500 episodes)
+success rate, last 100 training episodes: 1.00
+mean return,  last 100 training episodes: 9.65
+first training episode reaching the goal: 29
+
+Greedy evaluation from (2,0), epsilon=0, no updates:
+  success=True steps=4 invalid=0 timeout=False
+  actions: ['Right', 'Right', 'Right', 'Right']
+  positions: [(2, 0), (2, 1), (2, 2), (2, 3), (2, 4)]
+. . # . .
+. . # . .
+R R R R R
+. . # . .
+. . # . .
+
+Uniformly random policy, 100 episodes:
+  {'success_frac': 0.18, 'timeout_frac': 0.82, 'mean_steps_success': 26.944444444444443, 'mean_invalid_per_run': 9.86}
+
+Additional start (0,0), no retraining:
+  success=True steps=6 invalid=0 path=[(0, 0), (1, 0), (2, 0), (2, 1), (2, 2), (2, 3), (2, 4)]
+
+Optional: no exploration (epsilon=0 throughout), seeds 7 and 11:
+  seed 7: training successes=1497/1500, greedy success=True steps=4
+  seed 11: training successes=1497/1500, greedy success=True steps=4

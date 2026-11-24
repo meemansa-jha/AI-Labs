@@ -1,0 +1,11 @@
+Two-robot DQN robustness check (same settings as Task 6/7; only seed and budget changed).
+Columns: greedy outcome/steps from the default start; greedy outcome/steps from A=(0,0), B=(4,4);
+success / collision fraction over the last 200 TRAINING episodes (epsilon = 0.05).
+
+seed=7  steps=60000  default=timeout/40  alt=timeout/40  last200: succ=see dqn_transcript.txt
+seed=1  steps=60000  default=timeout/40  alt=success/14  last200: succ=0.70 coll=0.07
+seed=2  steps=60000  default=timeout/40  alt=timeout/40  last200: succ=0.35 coll=0.12
+seed=3  steps=60000  default=timeout/40  alt=timeout/40  last200: succ=0.20 coll=0.07
+seed=11 steps=60000  default=timeout/40  alt=timeout/40  last200: succ=0.09 coll=0.11
+seed=7  steps=120000 default=success/7   alt=success/11  last200: succ=0.93 coll=0.04
+seed=1  steps=120000 default=success/8   alt=success/12  last200: succ=0.96 coll=0.01
