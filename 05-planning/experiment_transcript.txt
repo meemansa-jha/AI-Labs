@@ -1,0 +1,100 @@
+
+========================================================================
+TASK 0 — which actions are applicable in I?
+========================================================================
+I = {At(Package,A), At(Robot,A)}
+  Move(A,B)            APPLICABLE
+  Move(B,A)            not applicable (missing At(Robot,B))
+  Move(B,C)            not applicable (missing At(Robot,B))
+  Move(C,B)            not applicable (missing At(Robot,C))
+  Drop(Package,A)      not applicable (missing Holding(Package))
+  Drop(Package,B)      not applicable (missing At(Robot,B), Holding(Package))
+  Drop(Package,C)      not applicable (missing At(Robot,C), Holding(Package))
+  PickUp(Package,A)    APPLICABLE
+  PickUp(Package,B)    not applicable (missing At(Package,B), At(Robot,B))
+  PickUp(Package,C)    not applicable (missing At(Package,C), At(Robot,C))
+
+========================================================================
+TASK 1 — hand-built plan, checked by the validator
+========================================================================
+
+Hand plan: PickUp(Package,A), Move(A,B), Move(B,C), Drop(Package,C)
+  valid = True, reaches goal = True, length = 4
+  S0 = {At(Package,A), At(Robot,A)}
+  --PickUp(Package,A)-->
+  S1 = {At(Robot,A), Holding(Package)}
+  --Move(A,B)-->
+  S2 = {At(Robot,B), Holding(Package)}
+  --Move(B,C)-->
+  S3 = {At(Robot,C), Holding(Package)}
+  --Drop(Package,C)-->
+  S4 = {At(Package,C), At(Robot,C)}
+
+Lab's example sequence: Move(A,B), PickUp(Package,B), Move(B,C), Drop(Package,C)
+  valid = False -> step 2: PickUp(Package,B) is not applicable; unsatisfied precondition(s): At(Package,B)
+
+========================================================================
+TASK 3 / TEST A — solvable warehouse problem
+========================================================================
+plan found = True, length = 4, states expanded = 8
+  S0 = {At(Package,A), At(Robot,A)}
+  --PickUp(Package,A)-->
+  S1 = {At(Robot,A), Holding(Package)}
+  --Move(A,B)-->
+  S2 = {At(Robot,B), Holding(Package)}
+  --Move(B,C)-->
+  S3 = {At(Robot,C), Holding(Package)}
+  --Drop(Package,C)-->
+  S4 = {At(Package,C), At(Robot,C)}
+
+Independent validation of BFS plan: PickUp(Package,A), Move(A,B), Move(B,C), Drop(Package,C)
+  valid = True, reaches goal = True, length = 4
+
+========================================================================
+TASK 3 / TEST B — impossible problem (PickUp removed)
+========================================================================
+No plan found
+(states expanded before giving up: 3)
+
+========================================================================
+TASK 3 / TEST C — irrelevant actions: robot at C ≠ package at C
+========================================================================
+Goal At(Robot,C):   plan = ['Move(A,B)', 'Move(B,C)']
+Goal At(Package,C): plan = ['PickUp(Package,A)', 'Move(A,B)', 'Move(B,C)', 'Drop(Package,C)']
+
+Robot-only moves for goal At(Package,C): Move(A,B), Move(B,C)
+  valid = True, reaches goal = False, length = 2
+
+========================================================================
+TASK 6 — locked door
+========================================================================
+(b) BFS plan found = True, length = 4, expanded = 7
+  S0 = {At(A), KeyAt(A)}
+  --PickKey-->
+  S1 = {At(A), HasKey}
+  --Move(A,B)-->
+  S2 = {At(B), HasKey}
+  --Unlock-->
+  S3 = {At(B), HasKey, Unlocked}
+  --Move(B,C)-->
+  S4 = {At(C), HasKey, Unlocked}
+
+(c) Without PickKey: plan found = False, reachable states explored = 2
+
+(d) Proposed sequence: Move(A,B), Unlock, Move(B,C)
+  valid = False -> step 2: Unlock is not applicable; unsatisfied precondition(s): HasKey
+
+========================================================================
+TASK 7 — validator on example candidate plans (check a real LLM plan with: python3 check_plan.py door ...)
+========================================================================
+
+Candidate 1 (correct order): PickKey, Move(A,B), Unlock, Move(B,C)
+  valid = True, reaches goal = True, length = 4
+  same length as shortest BFS plan (4)? True
+
+Candidate 2 (forgets the key): Move(A,B), Unlock, Move(B,C)
+  valid = False -> step 2: Unlock is not applicable; unsatisfied precondition(s): HasKey
+
+Candidate 3 (goes back for the key): Move(A,B), Move(B,A), PickKey, Move(A,B), Unlock, Move(B,C)
+  valid = True, reaches goal = True, length = 6
+  same length as shortest BFS plan (4)? False

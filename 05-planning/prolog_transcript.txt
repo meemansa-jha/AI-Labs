@@ -1,0 +1,11 @@
+Task 8
+?- can_move(a,b).             true
+?- can_move(a,c).             false
+Task 9
+?- valid_move(a,b).           true
+?- valid_move(b,c).           true
+?- valid_move(a,c).           false
+?- valid_plan(a,[b,c]).       true
+?- valid_plan(a,[c]).         false
+Task 10
+?- reduce_speed.              true
